@@ -1,0 +1,1008 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Mera Rojgar</title>
+        <meta charset="UTF-8" />
+        <link rel="shortcut icon" href="{% static 'images/fav.png' %}" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        <meta name="keywords" content="">
+        <meta name="robots" content="index, follow">
+        <meta name="description" content="" />
+
+            <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    		<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+    		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    		<link rel="preconnect" href="https://fonts.googleapis.com">
+			<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+			<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+            <link rel="stylesheet" type="text/css" href="{% static 'css/custom.css' %}">
+
+            <style>
+                body{
+                    min-height: 100vh;
+                }
+                .sticky-footer{
+                    position: sticky;
+                    top: 100%;
+                }
+
+
+                
+a {
+  border: 0 none;
+  outline: 0;
+  text-decoration: none;
+}
+
+strong {
+  font-weight: bold;
+}
+
+p {
+  margin: 0.75rem 0 0;
+}
+
+h1 {
+  font-size: 0.75rem;
+  font-weight: normal;
+  margin: 0;
+  padding: 0;
+}
+
+input,
+button {
+  border: 0 none;
+  outline: 0 none;
+}
+
+button {
+  background-color: #666;
+  color: #fff;
+}
+
+button:hover,
+button:focus {
+  background-color: #555;
+}
+
+img,
+.basket-module,
+.basket-labels,
+.basket-product {
+  width: 100%;
+}
+
+input,
+button,
+.basket,
+.basket-module,
+.basket-labels,
+.item,
+.price,
+.quantity,
+.subtotal,
+.basket-product,
+.product-image,
+.product-details {
+  float: left;
+}
+
+.price:before,
+.subtotal:before,
+.subtotal-value:before,
+.total-value:before,
+.promo-value:before {
+  content: '₹ ';
+}
+
+.hide {
+  display: none;
+}
+
+main {
+  clear: both;
+  font-size: 0.75rem;
+  margin: 0 auto;
+  overflow: hidden;
+  padding: 1rem 0;
+  width: 1150px;
+}
+
+.basket,
+aside {
+  padding: 0 1rem;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.basket {
+  width: 70%;
+}
+
+.basket-module {
+  color: #111;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.3125rem;
+}
+
+.promo-code-field {
+  border: 1px solid #ccc;
+  padding: 0.5rem;
+  text-transform: uppercase;
+  transition: all 0.2s linear;
+  width: 60%;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+  -o-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+}
+
+.promo-code-field:hover,
+.promo-code-field:focus {
+  border: 1px solid #999;
+}
+
+.promo-code-cta {
+  border-radius: 4px;
+  font-size: 0.625rem;
+  margin-left: 0.625rem;
+  padding: 0.6875rem 1.25rem 0.625rem;
+  background-color: coral;
+}
+
+.basket-labels {
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  margin-top: 1.625rem;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  color: #111;
+  display: inline-block;
+  padding: 0.625rem 0;
+}
+
+li.price:before,
+li.subtotal:before {
+  content: '';
+}
+
+.item {
+  width: 55%;
+}
+
+.price,
+.quantity,
+.subtotal {
+  width: 15%;
+}
+
+.subtotal {
+  text-align: right;
+}
+
+.remove {
+  bottom: 1.125rem;
+  float: right;
+  position: absolute;
+  right: 0;
+  text-align: right;
+  width: 45%;
+}
+
+.remove button {
+  background-color: transparent;
+  color: rgb(224, 40, 40);
+  float: none;
+  text-decoration: underline;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.item-heading {
+  padding-left: 4.375rem;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.basket-product {
+  border-bottom: 1px solid #ccc;
+  padding: 1rem 0;
+  position: relative;
+}
+
+.product-image {
+  width: 35%;
+}
+
+.product-details {
+  width: 65%;
+}
+
+.product-frame {
+  border: 1px solid #aaa;
+}
+
+.product-details {
+  padding: 0 1.5rem;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.quantity-field {
+  background-color: #ccc;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  font-size: 0.625rem;
+  padding: 10px;
+  width: 3.75rem;
+}
+
+aside {
+  float: right;
+  position: relative;
+  width: 30%;
+}
+
+.summary {
+  background-color: #eee;
+  border: 1px solid #aaa;
+  padding: 1rem;
+  {% comment %} position: fixed; {% endcomment %}
+  width: 250px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.summary-total-items {
+  color: #666;
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+.summary-subtotal,
+.summary-total {
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  clear: both;
+  margin: 1rem 0;
+  overflow: hidden;
+  padding: 0.5rem 0;
+}
+
+.subtotal-title,
+.subtotal-value,
+.total-title,
+.total-value,
+.promo-title,
+.promo-value {
+  color: #111;
+  float: left;
+  width: 50%;
+}
+
+.summary-promo {
+  -webkit-transition: all .3s ease;
+  -moz-transition: all .3s ease;
+  -o-transition: all .3s ease;
+  transition: all .3s ease;
+}
+
+.promo-title {
+  float: left;
+  width: 70%;
+}
+
+.promo-value {
+  color: #8B0000;
+  float: left;
+  text-align: right;
+  width: 30%;
+}
+
+.summary-delivery {
+  padding-bottom: 3rem;
+}
+
+.subtotal-value,
+.total-value {
+  text-align: right;
+}
+
+.total-title {
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.summary-checkout {
+  display: block;
+}
+
+.checkout-cta {
+  display: block;
+  float: none;
+  font-size: 0.75rem;
+  text-align: center;
+  text-transform: uppercase;
+  padding: 0.625rem 0;
+  width: 100%;
+  background-color:coral;
+}
+
+.summary-delivery-selection {
+  background-color: #ccc;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  display: block;
+  font-size: 0.625rem;
+  height: 34px;
+  width: 100%;
+}
+
+@media screen and (max-width: 640px) {
+  aside,
+  .basket,
+  .summary,
+  .item,
+  .remove {
+    width: 100%;
+  }
+  .basket-labels {
+    display: none;
+  }
+  .basket-module {
+    margin-bottom: 1rem;
+  }
+  .item {
+    margin-bottom: 1rem;
+  }
+  .product-image {
+    width: 40%;
+  }
+  .product-details {
+    width: 60%;
+  }
+  .price,
+  .subtotal {
+    width: 33%;
+  }
+  .quantity {
+    text-align: center;
+    width: 34%;
+  }
+  .quantity-field {
+    float: none;
+  }
+  .remove {
+    bottom: 0;
+    text-align: left;
+    margin-top: 0.75rem;
+    position: relative;
+  }
+  .remove button {
+    padding: 0;
+  }
+  .summary {
+    margin-top: 1.25rem;
+    position: relative;
+  }
+}
+
+@media screen and (min-width: 641px) and (max-width: 960px) {
+  aside {
+    padding: 0 1rem 0 0;
+  }
+  .summary {
+    width: 28%;
+  }
+}
+
+@media screen and (max-width: 960px) {
+  main {
+    width: 100%;
+  }
+  .product-details {
+    padding: 0 1rem;
+  }
+}
+            </style>
+</head>
+<body>
+	<div class="ovrlay"></div>
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-12">
+                    <a href="{% url 'home' %}" class="brand"><img src="{% static 'images/logo.png' %}"></a>
+                    <a href="javascript:;" class="toggle-menu  float-right mt-3  "><i
+                            class="fa fa-bars  x d-inline-block d-md-none"></i></a>
+                </div>
+                <div class="col-md-9 text-right sidebar-menu">
+                    <a href="javascript:;" class="d-block d-md-none closee">X</a>
+                   <ul>
+                        <li><a href="{% url 'home' %}" class="active">Home</a></li>
+                        <li><a href="{% url 'about' %}">About Mera Rojgar</a></li>
+                        <li><a href="{% url 'product_catalog' %}">Product Catalog</a></li>
+                        <li><a href="{% url 'contact' %}">Contact Us</a></li>
+                        {% if request.session.userID %}
+                        <!-- <li><a href="{% url 'logout' %}">Logout</a></li> -->
+                        <li><a href="{% url 'cart' %}"
+                                style="border:0px solid #ff5a10b3;color:#ff5a10b3;padding: 3px 5px;border-radius:10px;"><i
+                                    class="fas fa-shopping-cart"></i>&nbsp; {% if cartLength == 0 %} 0
+                                {% else %}{{cartLength}}{% endif %}</a></li>
+                        <div class="btn-group ml-2">
+                            <span type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                <i class="fas fa-user" style="color:#ff5a10b3;font-size: large;"></i>
+                                <!-- {{request.session.username}} -->
+                            </span>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item mt-2" href="{% url 'customer_info' %}"><i
+                                        style="color:#ff5a10b3;" class="fas fa-user-circle"></i>&nbsp;&nbsp;&nbsp; <small><strong>My
+                                            Profile</strong></small></a>
+                                <a class="dropdown-item mt-2" href="{% url 'wishlist' %}"><i style="color:#ff5a10b3;"
+                                        class="fas fa-heart"></i>&nbsp;&nbsp;&nbsp; <small><strong>My Wishlist</strong></small></a>
+                                <a class="dropdown-item mt-2" href="{% url 'customer_orders' %}"><i
+                                        style="color:#ff5a10b3;" class="fas fa-shopping-bag"></i>&nbsp;&nbsp;&nbsp;
+                                    <small><strong>My Orders</strong></small></a>
+                                <a class="dropdown-item mt-2" href="{% url 'customer_address' %}"><i
+                                        style="color:#ff5a10b3;" class="fas fa-map-marker-alt"></i>&nbsp;&nbsp;&nbsp;
+                                    <small><strong>My Address</strong></small></a>
+                                <hr>
+                                <a class="dropdown-item" href="{% url 'logout' %}"><i style="color:#ff5a10b3;"
+                                        class="fas fa-sign-out-alt"></i>&nbsp;&nbsp;&nbsp; <small><strong>Logout</strong></small></a>
+                            </div>
+                        </div>
+                        <!-- <li style=''><a href="{% url 'customer_info' %}" class="btn btn-primary"
+								style='font-size: smaller;background-color: #ff5a10b3;color: white;border:2px solid white;cursor: pointer;border-radius:10px;'>
+								{{request.session.username}} &nbsp;<i class="fas fa-user"
+									style='font-size: large;color: white;cursor: pointer;'></i></a></li> -->
+                        {% else %}
+                        <li><a href="{% url 'login' %}">Login</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+    
+        </div>
+    </header>
+	{% comment %} <div class="page-header-small ">
+		 <div class="container">
+			<div class="row">
+				<div class="col-md-12  ">
+					<h4 id='customerEntryType' style='font-weight:800;'>Cart Details</h4>
+				</div>
+			</div>
+		</div>
+	</div> {% endcomment %}
+	<div class="main section products" >
+    {% comment %} --------------------------------------------------------------------------------------------------- {% endcomment %}
+    <main>
+    {% if cartLength > 0 %}
+    <div class="basket">
+      <div class="basket-module">
+        <label for="promo-code">Enter a promotional code</label>
+        <input id="promo-code" type="text" name="promo-code" maxlength="5" class="promo-code-field">
+        <button class="promo-code-cta">Apply</button>
+      </div>
+      <div class="basket-labels">
+        <ul>
+          <li class="item item-heading">Item</li>
+          <li class="price">Price</li>
+          <li class="quantity">Quantity</li>
+          <li class="subtotal">Subtotal</li>
+        </ul>
+      </div>
+      {% for i in cart_detail %}
+      <div class="basket-product">
+        <div class="item">
+          <div class="product-image">
+            <img src="http://13.233.247.133:1000/static/{{i.productfk.productCoverImages}}" alt="Placholder Image 2" class="product-frame">
+          </div>
+          <div class="product-details">
+            <h1><strong><span class="item-quantity">{{i.productQuantity}}</span> x </strong> {{i.productfk.productName}}</h1>
+            {% comment %} <p><strong>Navy, Size 18</strong></p> {% endcomment %}
+            {% comment %} <p>Product Code - 232321939</p> {% endcomment %}
+          </div>
+        </div>
+        <div class="price">{{i.productfk.productPrice}}</div>
+        <div class="quantity">
+          <input type="number" value="{{i.productQuantity}}" min="1" class="quantity-field" onclick="getQuantity(this)" onchange="getQuantity(this)" id='{{i.id}}' productID="{{i.productfk.id}}">
+        </div>
+        <div class="subtotal">{% widthratio i.productfk.productPrice 1 i.productQuantity %}.00</div>
+        <div class="remove">
+          <button id='{{i.id}}' onclick='' title='move to wishlist'><i style='color:rgb(250, 124, 86);' class="fas fa-heart"></i></button>
+          <button id='{{i.id}}' onclick='deleteCartItems(this)'><i class="fas fa-trash-alt"></i></button>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <aside>
+      <div class="summary" style="margin-top: 85px;">
+        <div class="summary-total-items"><strong><span class="total-items" style='font-size:20px;'></span></strong> Items in your Bag</div>
+        <div class="summary-subtotal">
+          <div class="subtotal-title">Subtotal</div>
+          <div class="subtotal-value final-value" id="basket-subtotal">{{totalPrice}}</div>
+          <div class="summary-promo hide">
+            <div class="promo-title">Promotion</div>
+            <div class="promo-value final-value" id="basket-promo"></div>
+          </div>
+        </div>
+        <!-- <div class="summary-delivery">
+        </div> -->
+        <div class="summary-total">
+          <div class="total-title">Total</div>
+          <div class="total-value final-value" id="basket-total">{{totalPrice}}</div>
+        </div>
+        <div class="summary-checkout">
+          <button class="checkout-cta"  data-toggle="modal" data-target="#addressModal" data-keyboard="false" data-backdrop="static"><i class="far fa-share-square"></i> Checkout</button>
+        </div>
+      </div>
+    </aside>
+    {% else %}
+    
+        <div class="col-lg-12 text-center" style="">
+          <!-- <p>No Product Available in cart!</p> -->
+          <img src="https://www.no-fea.com/front/images/empty-cart.png" alt="">
+                </div>
+    {% endif %}
+  </main>
+</div>
+
+
+	<footer class="sticky-footer">
+	    <div class="container">
+			<div class="row">
+				<div class="col-md-6 ">
+					<p>© 2021 by 4youths. All right reservered. </p>
+				</div>
+				<div class="col-md-6 text-center text-md-right ">
+					 <p>
+						<strong>Follow us on:</strong> <a href="https://www.facebook.com/4youths.org/" style="margin-right:15px;margin-left:15px"><i class="fab fa-facebook-f"></i></a>
+						<a href="https://twitter.com/4youthsorg?lang=en" style="margin-right:15px"><i class="fab fa-twitter"></i></a>
+						<a href="https://www.linkedin.com/in/yref/?originalSubdomain=in" style="margin-right:10px"><i class="fab fa-linkedin-in"></i></a>
+					</p>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+
+
+  <!-- Button trigger modal -->
+<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+  Launch demo modal
+</button> -->
+
+<!-- Modal -->
+<div class="modal fade" id="addressModal" tabindex="-1" role="dialog" aria-labelledby="addressModalTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Select Delivery Address</h5>
+        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button> -->
+      </div>
+      <div class="modal-body">
+        {% for i in addressList %}
+                            <small>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id='{{i.id}}' value='{{i.id}}' onclick="">
+                                    <label class="form-check-label" for='{{i.id}}'>
+                                        <strong>{{i.fullname}}, {{i.contact}}</strong><br>
+                                        &nbsp;&nbsp;<span>{{i.address}}, {{i.landmark}}, {{i.district}}, {{i.state}}, {{i.pincode}}</span>
+                                    </label>
+                                </div>
+                            </small>
+                            <hr>
+          {% endfor %}
+          <div class="text-right">
+            <button type="button" class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#exampleModalCenter1" data-keyboard="false" data-backdrop="static" id="closemodal">+ Add New Address</button>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary btn-sm" onclick="checkout()">Proceed</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- enquiry modal -->
+    <!-- Modal -->
+    <div id="enquiry" class="modal fade enquiry" role="dialog">
+        <div class="modal-dialog modal-md">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header text-left">
+                    <h4 class="modal-title float-left">Send Loan Enquiry</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                </div>
+                <div class="modal-body">
+                    {% comment %} <form> {% endcomment %}
+                        <div class="form-group">
+                            <label>Your Name</label>
+                            <input type="text" placeholder="Enter your name" name="" id='customerName' class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>Your Phone Number</label>
+                            <input type="tel" onkeypress="return /[0-9]/i.test(event.key)" id='customerContact' maxlength="10" placeholder="Enter your phone number" name="" class="form-control">
+                        </div>
+                       
+                        <div class="form-group">
+                            <label>Your Email (Optional)</label>
+                            <input type="text" placeholder="Enter your email" onkeyup="checkEmail()" id='custEmail' name="" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>Enter State</label>
+                            <input type="text" placeholder="Enter your state" onkeyup="checkEmail()" id='custState' name="" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>Enter City</label>
+                            <input type="text" placeholder="Enter your city" onkeyup="checkEmail()" id='custCity' name="" class="form-control">
+                        </div>
+                         <div class="form-group">
+                            <label>Enter Address</label>
+                            <textarea placeholder="Enter Address" id='customerAddress' name="" class="form-control"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Remark (Optional)</label>
+                            <textarea placeholder="Enter remark" id='customerRemark' name="" class="form-control"></textarea>
+                        </div>
+                        <button class="btn float-right mt-3" id='enquiryButton' productID="{{product_detail.id}}" onclick=''>Submit</button>
+                        <button class="btn btn-primary float-right mt-3" type="button" disabled id='spinnerbtn' style='display:none'>
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            <span class="sr-only"></span>Sending Enquiry
+                        </button>
+                    {% comment %} </form> {% endcomment %}
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+<!-- 
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Payment Method</h5>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-check">
+        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+        <label class="form-check-label" for="flexRadioDefault2">
+            Cash On Delivery
+        </label>
+        </div><hr>
+        <div class="form-check">
+        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+        <label class="form-check-label" for="flexRadioDefault2">
+            Online Payment
+        </label>
+        </div>
+        <hr>
+        <div class="form-check">
+        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+        <label class="form-check-label" for="flexRadioDefault2">
+            Loan Enquiry
+        </label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary btn-sm" onclick="return alert('Under Development!')">Proceed</button>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">+ Add New Address</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <!-- <div class="col-lg-12 "> -->
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label><strong>Full Name</strong></label>
+                                <input type="text" placeholder="" name="userfullname" id='customerfullname'
+                                    class="form-control" onkeypress="return /[a-zA-Z ]/i.test(event.key)" value=''
+                                    required>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label><strong>Contact</strong></label>
+                                <input type="text" placeholder="10 digit mobile number" name="userContact"
+                                    id='customerNewcontact' class="form-control" maxlength="10"
+                                    onkeypress="return /[0-9]/i.test(event.key)" value='' required>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label><strong>Pincode</strong></label>
+                                <input type="text" placeholder="" name="username" id='customerNewPincode'
+                                    class="form-control" onkeypress="return /[0-9]/i.test(event.key)" maxlength='6'
+                                    value='' onkeyup='getPostalAddress()'>
+                            </div>
+                        </div>
+
+
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label><strong>Landmark</strong></label>
+                                <input type="text" placeholder="" name="username" id='customerNewLocation' style=""
+                                    class="form-control" onkeypress="return /[a-zA-Z,. ]/i.test(event.key)" value=''
+                                    required>
+                            </div>
+                        </div>
+
+
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label><strong>District</strong></label>
+                                <input type="text" placeholder="" name="userdistrict" id='customerNewDistrict'
+                                    class="form-control" onkeypress="return /[a-zA-Z]/i.test(event.key)" value=''
+                                    required>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label><strong>State</strong></label>
+                                <!-- <input type="text" placeholder="" name="username" id='customerNewState'
+                                        class="form-control" onkeypress="return /[a-zA-Z]/i.test(event.key)" value=''
+                                        required> -->
+                                <select name="state" id="customerNewState" class="form-control">
+                                    <option value="" selected class="d-none">Select State</option>
+                                    <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                    <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                                    <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                                    <option value="Assam">Assam</option>
+                                    <option value="Bihar">Bihar</option>
+                                    <option value="Chandigarh">Chandigarh</option>
+                                    <option value="Chhattisgarh">Chhattisgarh</option>
+                                    <option value="Dadar and Nagar Haveli">Dadar and Nagar Haveli</option>
+                                    <option value="Daman and Diu">Daman and Diu</option>
+                                    <option value="Delhi">Delhi</option>
+                                    <option value="Lakshadweep">Lakshadweep</option>
+                                    <option value="Puducherry">Puducherry</option>
+                                    <option value="Goa">Goa</option>
+                                    <option value="Gujarat">Gujarat</option>
+                                    <option value="Haryana">Haryana</option>
+                                    <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                    <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                                    <option value="Jharkhand">Jharkhand</option>
+                                    <option value="Karnataka">Karnataka</option>
+                                    <option value="Kerala">Kerala</option>
+                                    <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                    <option value="Maharashtra">Maharashtra</option>
+                                    <option value="Manipur">Manipur</option>
+                                    <option value="Meghalaya">Meghalaya</option>
+                                    <option value="Mizoram">Mizoram</option>
+                                    <option value="Nagaland">Nagaland</option>
+                                    <option value="Odisha">Odisha</option>
+                                    <option value="Punjab">Punjab</option>
+                                    <option value="Rajasthan">Rajasthan</option>
+                                    <option value="Sikkim">Sikkim</option>
+                                    <option value="Tamil Nadu">Tamil Nadu</option>
+                                    <option value="Telangana">Telangana</option>
+                                    <option value="Tripura">Tripura</option>
+                                    <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                    <option value="Uttarakhand">Uttarakhand</option>
+                                    <option value="West Bengal">West Bengal</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label><strong>Address</strong></label>
+                                <input type="text" placeholder="" name="username" id='customerNewAddress'
+                                    class="form-control" onkeypress="return /[a-zA-Z0-9:., ]/i.test(event.key)" value=''
+                                    required>
+                            </div>
+                        </div>
+                        <!-- </div> -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal" >Cancel</button>
+                        <button type="button" class="btn btn-primary btn-sm" onclick="addNewAddress()">Add</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+<!-- scrips -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
+ <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+ <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script type="text/javascript" src="{% static 'js/custom.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script type="text/javascript" src="{% static 'js/customerAddressInfo.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="  crossorigin="anonymous"></script>
+
+
+</body>
+
+<script>
+    function getPaymentType(thisTxt){
+
+        var paymentType = $(thisTxt).val().trim();
+        if(paymentType == 'cod'){
+            $('#cod-pay').css('display','');
+            $('#rzp-button1').css('display','none');
+        }else if(paymentType == 'online'){
+            $('#cod-pay').css('display','none');
+            $('#rzp-button1').css('display','');
+        }
+    }
+
+    
+
+    // function closeAddressModal(){
+    //   $('#').modal('hide');
+    // }
+
+$('#closemodal').click(function() {
+// $('#addressModal').modal('hide');
+  $('#addressModal').css('opacity',0);
+});
+
+
+$('#closeNewmodal').click(function() {
+// $('#addressModal').modal('hide');
+  $('#NewAddressModal').css('opacity',0.2);
+});
+
+      function getPostalAddress() {
+        var pincode = $('#customerNewPincode').val().trim();
+        if (pincode.length == 6) {
+
+            $.ajax({
+                type: 'GET',
+                url: "https://api.postalpincode.in/pincode/"+pincode,
+                success: function (response) {
+                    console.log(response);
+
+                    if(response[0]['Status'] == 'Success'){
+                        $('#customerNewPincode').css('border','');
+                        $('#customerNewPincode').css('color','black');
+
+                        var district = response[0]['PostOffice'][0]['District'];
+                        var state = response[0]['PostOffice'][0]['State'];
+                        $('#customerNewDistrict').val('');
+                        $('#customerNewState').val('');
+                        
+                        $('#customerNewDistrict').val(district);
+                        $('#customerNewState').val(state);
+                    }else{
+                        $('#customerNewPincode').css('border','2px solid red');
+                        $('#customerNewPincode').css('color','red');
+                        $('#customerNewDistrict').val('');
+                        $('#customerNewState').val('');
+                    }
+                    
+                }
+            });
+        }else{
+            $('#customerNewDistrict').val('');
+            $('#customerNewState').val('');
+        }
+    }
+
+    function deleteCartItems(thisTxt){
+        var productId = $(thisTxt).attr('id');
+        Swal.fire({
+        title: '<small>Are you sure?</small>',
+        text: "You want to remove this product from cart!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+        if (result.isConfirmed) {
+            console.log('order id >>> ',productId);
+        // ---------------   AJAX Call   ---------------------
+        $.ajax({
+            type: 'GET',
+            url: "/delete_cart_items/"+productId,
+            success: function (response) {
+                console.log(response);
+                if(response['message'] == 'success'){
+                    location.reload();
+                }else{
+                    alert('Your enquiry failed.Try Again!');
+                    return false;
+                }
+            }
+        });
+
+        // ---------------------------------------------------
+        }
+        })
+    }
+    // ==========================================================================================================
+    // ==========================================================================================================
+        function selectAddress(thisTxt){
+            var id = $(thisTxt).attr('id');
+            $('#delivery_'+id+'').css('display','');
+
+            $('#priceSectionDetails').css('opacity','0.2');
+            $('#priceSectionDetails').css('pointer-events','none');
+            $('#paymentDiv').css('display','none');
+
+        }
+        
+        function devliverHere(thisTxt){
+            $('#priceSectionDetails').css('opacity','1');
+            $('#priceSectionDetails').css('pointer-events','');
+        }
+
+        function confirmOrder(){
+            $('#paymentDiv').css('display','');
+        }
+    // ==========================================================================================================
+    //                                       CART ITEM INCEMENT / DECREMENT
+    // ==========================================================================================================
+        function checkout(){
+          var addressID = $("input[name='flexRadioDefault']:checked").val();
+          console.log('addressID >>> ',addressID);
+
+
+          try {
+            if(addressID.trim().length == 0){
+            alert('select an address to continue!');
+            return false;
+          }
+          }
+          catch(err) {
+            alert('select an address to continue!');
+            return false;
+          }
+
+          
+          window.location.href = '/product-checkout'
+        }
+    // ==========================================================================================================
+    // ==========================================================================================================
+</script>
+</html>

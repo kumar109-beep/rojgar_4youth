@@ -1,0 +1,188 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Mera Rojgar</title>
+	<meta charset="UTF-8" />
+	<link rel="shortcut icon" href="{% static 'images/fav.png' %}" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+	<meta name="keywords" content="">
+	<meta name="robots" content="index, follow">
+	<meta name="description" content="" />
+
+	{% comment %}
+	<link rel="stylesheet" type="text/css" href="{% static 'adminModule/css/bootstrap.min.css' %}"> {% endcomment %}
+
+	<link rel="stylesheet" type="text/css"
+		href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+	<link rel="stylesheet" type="text/css"
+		href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+	<link rel="stylesheet" type="text/css"
+		href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+		integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800&display=swap"
+		rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/custom.css' %}">
+	<style>
+		body {
+			min-height: 100vh;
+		}
+
+		.sticky-footer {
+			position: sticky;
+			top: 100%;
+		}
+	</style>
+
+</head>
+
+<body>
+	<div class="ovrlay"></div>
+	<header>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3 col-12">
+					<a href="{% url 'home' %}" class="brand"><img src="{% static 'images/logo.png' %}"></a>
+					<a href="javascript:;" class="toggle-menu  float-right mt-3  "><i
+							class="fa fa-bars  x d-inline-block d-md-none"></i></a>
+				</div>
+				<div class="col-md-9 text-right sidebar-menu">
+					<a href="javascript:;" class="d-block d-md-none closee">X</a>
+					<ul>
+                        <li><a href="{% url 'home' %}" class="active">Home</a></li>
+                        <li><a href="{% url 'about' %}">About Mera Rojgar</a></li>
+                        <li><a href="{% url 'product_catalog' %}">Product Catalog</a></li>
+                        <li><a href="{% url 'contact' %}">Contact Us</a></li>
+                        {% if request.session.userID %}
+                        <!-- <li><a href="{% url 'logout' %}">Logout</a></li> -->
+                        <li><a href="{% url 'cart' %}"
+                                style="border:0px solid #ff5a10b3;color:#ff5a10b3;padding: 3px 5px;border-radius:10px;"><i
+                                    class="fas fa-shopping-cart"></i>&nbsp; {% if cartLength == 0 %} 0
+                                {% else %}{{cartLength}}{% endif %}</a></li>
+                        <div class="btn-group ml-2">
+                            <span type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                <i class="fas fa-user" style="color:#ff5a10b3;font-size: large;"></i>
+                                <!-- {{request.session.username}} -->
+                            </span>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item mt-2" href="{% url 'customer_info' %}"><i
+                                        style="color:#ff5a10b3;" class="fas fa-user-circle"></i>&nbsp;&nbsp;&nbsp; <small><strong>My
+                                            Profile</strong></small></a>
+                                <a class="dropdown-item mt-2" href="{% url 'wishlist' %}"><i style="color:#ff5a10b3;"
+                                        class="fas fa-heart"></i>&nbsp;&nbsp;&nbsp; <small><strong>My Wishlist</strong></small></a>
+                                <a class="dropdown-item mt-2" href="{% url 'customer_orders' %}"><i
+                                        style="color:#ff5a10b3;" class="fas fa-shopping-bag"></i>&nbsp;&nbsp;&nbsp;
+                                    <small><strong>My Orders</strong></small></a>
+                                <a class="dropdown-item mt-2" href="{% url 'customer_address' %}"><i
+                                        style="color:#ff5a10b3;" class="fas fa-map-marker-alt"></i>&nbsp;&nbsp;&nbsp;
+                                    <small><strong>My Address</strong></small></a>
+                                <hr>
+                                <a class="dropdown-item" href="{% url 'logout' %}"><i style="color:#ff5a10b3;"
+                                        class="fas fa-sign-out-alt"></i>&nbsp;&nbsp;&nbsp; <small><strong>Logout</strong></small></a>
+                            </div>
+                        </div>
+                        <!-- <li style=''><a href="{% url 'customer_info' %}" class="btn btn-primary"
+								style='font-size: smaller;background-color: #ff5a10b3;color: white;border:2px solid white;cursor: pointer;border-radius:10px;'>
+								{{request.session.username}} &nbsp;<i class="fas fa-user"
+									style='font-size: large;color: white;cursor: pointer;'></i></a></li> -->
+                        {% else %}
+                        <li><a href="{% url 'login' %}">Login</a></li>
+                        {% endif %}
+                    </ul>
+				</div>
+			</div>
+
+		</div>
+	</header>
+	<div class="slider">
+		<div class="owl-carousel owl-theme home-slider">
+			{% for i in bannerList %}
+			<div class="item">
+				<div class="container position-relative">
+					<div class="content">
+						<h4 class=" p_color_1 mb-3">Mera Rojgar</h4>
+						<h1 class="text-white font-weight-800">Work in every hand<br> Money in every pocket</h1>
+					</div>
+				</div>
+				<img src="http://13.233.247.133:1000/static/{{i.bannerImages}}" >
+			</div>
+			{% endfor %}
+		</div>
+
+	</div>
+
+	<div class="main section products">
+		<!-- [{'id': 18, 'productName': 'CHOLE-BHATURE MOBILE RESTAURANT', 'productCoverImages': '/Upload_Images/productImages/1_1.jfif', 'productImages_one': None, 'productImages_two': None, 'productImages_three': None, 'productImages_four': None, 'productImages_five': None, 'productImages_six': None, 'productImages_sevenr': None, 'productDescription': '4 wheels, hand-push cart  |  Multiple cabinets for storage  |  Dedicated cabinet for gas cylinder storage  |  Rain protection cover for the cart', 'productDimension': '1910|1070|2000', 'productPrice': '12000', 'productQuantity': '100', 'created_at': '2021-07-18T12:49:51.020718Z', 'updated_at': '2021-07-18T12:49:51.020743Z', 'productCategory': {'id': 2, 'productCategoryName': 'E-Cart', 'created_at': '2021-07-18T11:08:39.888050Z', 'updated_at': '2021-07-18T12:59:10.695348Z'}}, {'id': 19, 'productName': '3-IN-1 E-RICKSHAW', 'productCoverImages': '/Upload_Images/productImages/9_1-700x467.jpg', 'productImages_one': None, 'productImages_two': None, 'productImages_three': None, 'productImages_four': None, 'productImages_five': None, 'productImages_six': None, 'productImages_sevenr': None, 'productDescription': 'Passenger  Loader Vending cart Convertible design Battery operated, 5 seater rickshaw, seats can be folded and converted to loading van Foldable racks to convert the rickshaw into vending cart', 'productDimension': '2600|930|1750', 'productPrice': '13000', 'productQuantity': '200', 'created_at': '2021-07-18T12:57:33.484397Z', 'updated_at': '2021-07-18T12:57:33.484421Z', 'productCategory': {'id': 2, 'productCategoryName': 'E-Cart', 'created_at': '2021-07-18T11:08:39.888050Z', 'updated_at': '2021-07-18T12:59:10.695348Z'}}, {'id': 20, 'productName': 'FULL-FLEDGED RESTAURANT ON WHEELS', 'productCoverImages': '/Upload_Images/productImages/7_1-700x467.jpg', 'productImages_one': None, 'productImages_two': None, 'productImages_three': None, 'productImages_four': None, 'productImages_five': None, 'productImages_six': None, 'productImages_sevenr': None, 'productDescription': 'tainless steel material Heavy wheel base Steam jar (sweet-corn) Dedicated gas stove with large kadhai Multi-purpose storage facility Sensor-based water/juice/cola dispenser Wash basin with drain facility for easy hand-wash Dedicated bin for disposables', 'productDimension': '1500|920|2030', 'productPrice': '15000', 'productQuantity': '12', 'created_at': '2021-07-18T12:58:45.289171Z', 'updated_at': '2021-07-18T12:58:45.289196Z', 'productCategory': {'id': 2, 'productCategoryName': 'E-Cart', 'created_at': '2021-07-18T11:08:39.888050Z', 'updated_at': '2021-07-18T12:59:10.695348Z'}}] -->
+		<div class="container">
+			{% if productListLength == 0 %}
+			<div class="text-center">
+				<h3><strong>- No Product Available -</strong></h3>
+			</div>
+			{% else %}
+			<div class="row">
+				{% for i in productList %}
+				{% if i.productDisplay == True %}
+				<div class="col-md-3 mb-4 mb-md-5 pt-2"  style='box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;'>
+					<a href="{% url 'product_detail' i.id %}">
+						<div class="p-cont">
+							<img src="http://13.233.247.133:1000/static/{{i.productCoverImages}}" style='border-radius: 10px;'>
+						</div>
+						<small><p class="  text-center mt-3" style='font-weight:700;'>{{i.productName}}</p></small>
+					</a>
+				</div>
+				{% endif %}
+				{% endfor %}
+			</div>
+			{% endif %}
+		</div>
+
+
+
+
+	</div>
+
+
+	<footer class="sticky-footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 ">
+					<p>© 2021 by 4youths. All right reservered. </p>
+				</div>
+				<div class="col-md-6 text-center text-md-right ">
+					<p>
+						<strong>Follow us on:</strong> <a href="https://www.facebook.com/4youths.org/"
+							style="margin-right:15px;margin-left:15px"><i class="fab fa-facebook-f"></i></a>
+						<a href="https://twitter.com/4youthsorg?lang=en" style="margin-right:15px"><i
+								class="fab fa-twitter"></i></a>
+						<a href="https://www.linkedin.com/in/yref/?originalSubdomain=in" style="margin-right:10px"><i
+								class="fab fa-linkedin-in"></i></a>
+					</p>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+
+
+
+
+	<!-- scrips -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
+	<script type="text/javascript"
+		src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+	<script type="text/javascript" src="{% static 'js/custom.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/geolocation.js' %}"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+
+</html>

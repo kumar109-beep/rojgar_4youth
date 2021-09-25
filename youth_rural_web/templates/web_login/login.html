@@ -1,0 +1,501 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Mera Rojgar</title>
+    <meta charset="UTF-8" />
+    <link rel="shortcut icon" href="{% static 'images/fav.png' %}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="keywords" content="">
+    <meta name="robots" content="index, follow">
+    <meta name="description" content="" />
+
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/custom.css' %}">
+    
+    <style>
+        body {
+            min-height: 100vh;
+        }
+
+        .sticky-footer {
+            position: sticky;
+            top: 100%;
+        }
+
+        .button-34 {
+            background: #5E5DF0;
+            border-radius: 999px;
+            box-shadow: #5E5DF0 0 10px 20px -10px;
+            box-sizing: border-box;
+            color: #FFFFFF;
+            cursor: pointer;
+            font-family: Inter,Helvetica,"Apple Color Emoji","Segoe UI Emoji",NotoColorEmoji,"Noto Color Emoji","Segoe UI Symbol","Android Emoji",EmojiSymbols,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans",sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 24px;
+            opacity: 1;
+            outline: 0 solid transparent;
+            padding: 8px 18px;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            width: fit-content;
+            word-break: break-word;
+            border: 0;
+            }
+    </style>
+
+</head>
+
+<body>
+    <div class="ovrlay"></div>
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-12">
+                    <a href="{% url 'home' %}" class="brand"><img src="{% static 'images/logo.png' %}"></a>
+                    <a href="javascript:;" class="toggle-menu  float-right mt-3  "><i
+                            class="fa fa-bars  x d-inline-block d-md-none"></i></a>
+                </div>
+                <div class="col-md-9 text-right sidebar-menu">
+                    <a href="javascript:;" class="d-block d-md-none closee">X</a>
+                    <ul>
+                        <li><a href="{% url 'home' %}" class="active">Home</a></li>
+                        <li><a href="{% url 'about' %}">About Mera Rojgar</a></li>
+                        <li><a href="{% url 'product_catalog' %}">Product Catalog</a></li>
+                        <li><a href="{% url 'contact' %}">Contact Us</a></li>
+                        {% if request.session.userID %}
+                        <!-- <li><a href="{% url 'logout' %}">Logout</a></li> -->
+                        <li><a href="{% url 'cart' %}"
+                                style="border:0px solid #ff5a10b3;color:#ff5a10b3;padding: 3px 5px;border-radius:10px;"><i
+                                    class="fas fa-shopping-cart"></i>&nbsp; {% if cartLength == 0 %} 0
+                                {% else %}{{cartLength}}{% endif %}</a></li>
+                        <div class="btn-group ml-2">
+                            <span type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                <i class="fas fa-user" style="color:#ff5a10b3;font-size: large;"></i>
+                                <!-- {{request.session.username}} -->
+                            </span>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item mt-2" href="{% url 'customer_info' %}"><i
+                                        style="color:#ff5a10b3;" class="fas fa-user-circle"></i>&nbsp;&nbsp;&nbsp; <small><strong>My
+                                            Profile</strong></small></a>
+                                <a class="dropdown-item mt-2" href="{% url 'wishlist' %}"><i style="color:#ff5a10b3;"
+                                        class="fas fa-heart"></i>&nbsp;&nbsp;&nbsp; <small><strong>My Wishlist</strong></small></a>
+                                <a class="dropdown-item mt-2" href="{% url 'customer_orders' %}"><i
+                                        style="color:#ff5a10b3;" class="fas fa-shopping-bag"></i>&nbsp;&nbsp;&nbsp;
+                                    <small><strong>My Orders</strong></small></a>
+                                <a class="dropdown-item mt-2" href="{% url 'customer_address' %}"><i
+                                        style="color:#ff5a10b3;" class="fas fa-map-marker-alt"></i>&nbsp;&nbsp;&nbsp;
+                                    <small><strong>My Address</strong></small></a>
+                                <hr>
+                                <a class="dropdown-item" href="{% url 'logout' %}"><i style="color:#ff5a10b3;"
+                                        class="fas fa-sign-out-alt"></i>&nbsp;&nbsp;&nbsp; <small><strong>Logout</strong></small></a>
+                            </div>
+                        </div>
+                        <!-- <li style=''><a href="{% url 'customer_info' %}" class="btn btn-primary"
+								style='font-size: smaller;background-color: #ff5a10b3;color: white;border:2px solid white;cursor: pointer;border-radius:10px;'>
+								{{request.session.username}} &nbsp;<i class="fas fa-user"
+									style='font-size: large;color: white;cursor: pointer;'></i></a></li> -->
+                        {% else %}
+                        <li><a href="{% url 'login' %}">Login</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </header>
+    <div class="page-header-small ">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12  ">
+                    <h4 id='customerEntryType' style='font-weight:800;'>Customer Login</h4>
+                    <p style='color:green;font-weight:700;'>{{message}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main section products">
+        <div class="container" id='login_section_container' style='display:;'>
+            <p style='color:red;font-weight:700;font-size:13px;'>{{error_message}}</p>
+            <div class="row">
+                <div class="col-lg-4 ">
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label><strong>Enter mobile number</strong></label>
+                            <input type="text" name="contact" id='customerName' class="form-control" maxlength='10'
+                                onkeypress="return /[0-9]/i.test(event.key)" required>
+                        </div>
+                        <div class="form-group">
+                            <label><strong>Password</strong></label>
+                            <input type="Password" onkeypress="return /[a-zA-Z0-9]/i.test(event.key)"
+                                id='customerPassword' maxlength="" placeholder="" name="password" class="form-control"
+                                required>
+                        </div>
+                        <div>
+                            <input type="checkbox" name="" id="showPass1" onclick="viewpassword()"><strong><span
+                                    style="color: rgb(4, 4, 5);cursor: pointer;font-size:10px;">&nbsp; Show
+                                    Password</span></strong>
+                            <span class="float-right"><small><strong style="color: #ff5a10b3;cursor: pointer;"
+                                        onclick='showOTploginPage()'>Login via OTP</strong></small></span>
+                            <hr>
+                        </div>
+                        <div>
+                            <span><small style="color: rgb(4, 4, 5);cursor: pointer;"
+                                    onclick="forgetPassword()"><strong>Forget Password</strong></small></span> |
+                            <small>New customer? <strong style="color: #ff5a10b3;cursor: pointer;"
+                                    onclick='showSignUpPage()'>signup</strong></small>
+                            <hr>
+                        </div>
+                        <div class="text-right mt-2">
+                            <!-- <button type="button" class="btn btn-primary btn-sm" onclick='showOTploginPage()'>Login via OTP</button> -->
+                            <button type="submit" class="button-34" role="button">Login</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="container" id='otp_login_section_container' style='display:none;'>
+            <div class="row">
+                <div class="col-lg-4">
+                    <label><strong>Enter mobile number</strong></label>
+                    <input type="text" name="contact" id='otpContact' class="form-control" maxlength='10'
+                        onkeypress="return /[0-9]/i.test(event.key)">
+                    <div class="text-right mt-2">
+                        <span class="float-left"><small><strong style="color: #ff5a10b3;cursor: pointer;"
+                                    onclick='showLoginPage()'>Login via Password</strong></small></span>
+                        <button type="button"  class="button-34" id='sendOTPbtnn' role="button" onclick='sendOTP()'>Send OTP</button>
+                    </div><br>
+                    <span id="otpTimerDiv" style="display: none;"><small>OTP expires in :<strong style='pointer-events: none;color: #ff5a10b3' id="otpTimer"> 00:00</strong> <i class="far fa-clock"></i></small></span><br>
+
+                    <hr>
+                    <div class="col-lg-4" style="display: inline;opacity: 0.1;pointer-events: none;" id='loginOTPfield'>
+                        <!-- <span id="otpTimerDiv" style="display: none;"><small>OTP expires in :<strong style='pointer-events: none;color: #ff5a10b3' id="otpTimer"> xx:yy</strong>minutes</small></span><br> -->
+                            <input type="text" maxlength='1' onkeypress="return /[0-9]/i.test(event.key)" class='inputs' name="otp1" id="otp1"
+                            style="width: 40px;height: 40px;text-align: center;" >
+                            <input type="text" maxlength='1' onkeypress="return /[0-9]/i.test(event.key)" class='inputs' name="otp2" id="otp2"
+                                style="width: 40px;height: 40px;text-align: center;" >
+                            <input type="text" maxlength='1' onkeypress="return /[0-9]/i.test(event.key)" class='inputs' name="otp3" id="otp3"
+                                style="width: 40px;height: 40px;text-align: center;" >
+                            <input type="text" maxlength='1' onkeypress="return /[0-9]/i.test(event.key)" class='inputs' name="otp4" id="otp4"
+                                style="width: 40px;height: 40px;text-align: center;" onkeyup="verifyOtpAuto()">
+                            <div class="text-right mt-2" style="opacity: 0.1;pointer-events: none;" id='resendOTPsection'>
+                                <span class="mr-2" style='cursor:pointer;color: #ff5a10b3' onclick='resendOTP()'><small><strong><i class="fas fa-redo-alt"></i> Resend OTP</strong></small></span>
+                            {% comment %} <button type="button" class="button-34" onclick='verifyOtp()'>Verify OTP</button> {% endcomment %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="container" id='signin_section_container' style='display:none;'>
+            <div class="row">
+                <div class="col-lg-4">
+                    <label><strong>Enter mobile number to Register</strong></label>
+                    <input type="text" name="contact" id='otpSignupContact' class="form-control" maxlength='10'
+                        onkeypress="return /[0-9]/i.test(event.key)" onkeyup='checkExistence(this)'>
+                    <div class="text-right mt-2">
+                        <span class="float-left"><small><strong style="color: #ff5a10b3;cursor: pointer;"
+                                    onclick='showLoginPage()'>Login</strong></small></span>
+                        <button type="button"  class="button-34" id='sendOTPbtnn1' role="button" onclick='sendSignupOTP()'>Send OTP</button>
+                    </div>
+                    <span id="otpSignupTimerDiv" style="display: none;"><small>OTP expires in :<strong style='pointer-events: none;color: #ff5a10b3' id="otpSignupTimer"> 00:00</strong> <i class="far fa-clock"></i></small></span><br>
+
+                    <hr>
+                    <div class="col-lg-4" style="display: inline;opacity: 0.1;pointer-events: none;" id='signupOTPfield'>
+                        <!-- <span id="otpTimerDiv" style="display: none;"><small>OTP expires in :<strong style='pointer-events: none;color: #ff5a10b3' id="otpTimer"> xx:yy</strong>minutes</small></span><br> -->
+                            <input type="text" maxlength='1' onkeypress="return /[0-9]/i.test(event.key)" class='inputs' name="signup_otp1" id="signup_otp1"
+                            style="width: 40px;height: 40px;text-align: center;">
+                            <input type="text" maxlength='1' onkeypress="return /[0-9]/i.test(event.key)" class='inputs' name="signup_otp2" id="signup_otp2"
+                                style="width: 40px;height: 40px;text-align: center;">
+                            <input type="text" maxlength='1' onkeypress="return /[0-9]/i.test(event.key)" class='inputs' name="signup_otp3" id="signup_otp3"
+                                style="width: 40px;height: 40px;text-align: center;">
+                            <input type="text" maxlength='1' onkeypress="return /[0-9]/i.test(event.key)" class='inputs' onkeyup='verifySighUpOtpAuto()' name="signup_otp4" id="signup_otp4"
+                                style="width: 40px;height: 40px;text-align: center;">
+                            <div class="text-right mt-2" style="opacity: 0.1;pointer-events: none;" id='resendSignupOTPsection'>
+                                <span class="mr-2" style='cursor:pointer;color: #ff5a10b3' onclick='resendSignupOTP()'><small><strong><i class="fas fa-redo-alt"></i> Resend OTP</strong></small></span>
+                            {% comment %} <button type="button" class="button-34" onclick='verifySignupOtp()'>Verify OTP</button> {% endcomment %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+<!-- ============================================================================================ -->
+<div class="container" id='signin_section_container1' style='display:none;'>
+    <form action="register" method="post">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-lg-4 ">
+                <div class="form-group">
+                    <label><strong>Full Name</strong></label>
+                    <input type="text" placeholder="" name="register_fullname" id='register_fullname'
+                        class="form-control" required>
+                </div>
+            </div>
+            <div class="col-lg-4 ">
+                <div class="form-group">
+                    <label><strong>Mobile Number</strong></label>
+                    <input type="tel" maxlength="10" onkeypress="return /[0-9]/i.test(event.key)" placeholder=""
+                        name="register_contact" id='registerContact' class="form-control"
+                        onkeyup='checkExistence(this)' readonly style="pointer-events: none;"> 
+                </div>
+            </div>
+            <div class="col-lg-4 ">
+                <div class="form-group">
+                    <label><strong>Email</strong></label><span id=''>&nbsp;&nbsp;&nbsp;
+                        <small style='color:red;' id='parentEmailValidation'></small>
+                    </span>
+                    <input type="email" placeholder="" name="register_email" id='registerEmail'
+                        class="form-control" onkeyup='checkExistence(this)' required>
+                </div>
+            </div>
+            <div class="col-lg-4 ">
+                <div class="form-group">
+                    <label><strong>Password</strong></label>
+                    <input type="Password" onkeypress="return /[a-zA-Z0-9]/i.test(event.key)" id='pass1'
+                        maxlength="" placeholder="" name="" class="form-control" required>
+                </div>
+            </div>
+            <div class="col-lg-4 ">
+                <div class="form-group">
+                    <label><strong>Confirm Password</strong><small
+                            style="color: red;font-size: 10px;font-weight: 600;display:none;"
+                            id='showPassNotMatched'>&nbsp;&nbsp;&nbsp;&nbsp;Password not
+                            matched!</small></label>
+                    <input type="Password" onkeypress="return /[a-zA-Z0-9]/i.test(event.key)"
+                        onkeyup="checkPasswords()" id='pass2' maxlength="" placeholder=""
+                        name="register_password" class="form-control" required>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div>
+                    <input type="checkbox" name="" id="showPass2" onclick="viewRegisterpassword()"><strong><span
+                            style="color: rgb(4, 4, 5);cursor: pointer;font-size:10px;">&nbsp; Show
+                            Password</span></strong>
+                    <hr>
+                </div>
+                <div>
+                </div>
+                <small>Existing customer? <strong style="color: #ff5a10b3;cursor: pointer;"
+                        onclick='showLoginPage()'>login</strong></small>
+                <hr>
+                <div class="text-right mt-2">
+                    <button type="submit" id='registerBtn' class="btn btn-secondary btn-sm">Register</button>
+                </div>
+            </div>
+    </form>
+</div>
+        <!-- ========================================================================================= -->
+    </div>
+    </div>
+
+    <footer class="sticky-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 ">
+                    <p>© 2021 by 4youths. All right reservered. </p>
+                </div>
+                <div class="col-md-6 text-center text-md-right ">
+                    <p>
+                        <strong>Follow us on:</strong> <a href="https://www.facebook.com/4youths.org/"
+                            style="margin-right:15px;margin-left:15px"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://twitter.com/4youthsorg?lang=en" style="margin-right:15px"><i
+                                class="fab fa-twitter"></i></a>
+                        <a href="https://www.linkedin.com/in/yref/?originalSubdomain=in" style="margin-right:10px"><i
+                                class="fab fa-linkedin-in"></i></a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+
+
+
+    <!-- scrips -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="{% static 'js/custom.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="{% static 'js/otpHandling.js' %}"></script>
+</body>
+
+<script>
+    {% comment %} datePickerId.max = new Date().toISOString().split("T")[0]; {% endcomment %}
+    function showSignUpPage() {
+        $('#login_section_container').css('display', 'none');
+        $('#signin_section_container').css('display', '');
+        $('#customerEntryType').text('');
+        $('#customerEntryType').text('New Customer Registration');
+    }
+
+    function showLoginPage() {
+        $('#signin_section_container').css('display', 'none');
+        $('#otp_login_section_container').css('display', 'none');
+        $('#login_section_container').css('display', '');
+        $('#customerEntryType').text('');
+        $('#customerEntryType').text('Customer Login');
+    }
+
+    function showOTploginPage() {
+        $('#login_section_container').css('display', 'none');
+        $('#otp_login_section_container').css('display', '');
+        $('#customerEntryType').text('');
+        $('#customerEntryType').text('Customer Login');
+    }
+
+    function forgetPassword() {
+        alert('forget password!');
+    }
+
+    function viewpassword() {
+        if (document.getElementById('showPass1').checked) {
+            $("#customerPassword").attr('type', 'text');
+        } else {
+            $("#customerPassword").attr('type', 'password');
+        }
+    }
+
+    function viewRegisterpassword() {
+        if (document.getElementById('showPass2').checked) {
+            $("#pass1").attr('type', 'text');
+            $("#pass2").attr('type', 'text');
+        } else {
+            $("#pass1").attr('type', 'password');
+            $("#pass2").attr('type', 'password');
+        }
+    }
+
+    function checkPasswords() {
+        var pass1 = $('#pass1').val();
+        var pass2 = $('#pass2').val();
+        if (pass1.length == 0) {
+            alert('Enter Password First ');
+            $('#pass2').val('');
+            return false;
+        }
+
+        if (pass1.trim() != pass2.trim()) {
+            $('#pass2').css('border', '2px solid red');
+            $('#showPassNotMatched').css('display', '');
+            $('#registerBtn').prop('disabled', true);
+        } else {
+            $('#pass2').css('border', '');
+            $('#showPassNotMatched').css('display', 'none');
+            $('#registerBtn').prop('disabled', false);
+        }
+    }
+
+    // ====================================== check existing username/email/contact ==================================
+    function checkExistence(thisTxt) {
+        var inputType = $(thisTxt).attr('type');
+        var searchString = $(thisTxt).val();
+
+        console.log('inputType >>> ', inputType);
+        var type_of_search = '';
+        if (inputType == 'text') {
+            type_of_search = 'username';
+        }
+        if (inputType == 'tel') {
+            type_of_search = 'contact';
+        }
+        if (inputType == 'email') {
+            type_of_search = 'email';
+            var mailformat = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+            if (searchString.match(mailformat)) {
+                $('#parentEmailValidation').text('');
+                $('#parentEmailValidation').css('color', 'green');
+                $('#registerBtn').attr('disabled', false);
+            }
+            else {
+                $('#parentEmailValidation').text('Invalid Email');
+                $('#parentEmailValidation').css('color', 'red');
+                $('#registerBtn').attr('disabled', true);
+                return false;
+            }
+        }
+        console.log('type_of_search >>> ', type_of_search);
+        // --------------------------- AJAX CALL -----------------------------------
+        $.ajax({
+            type: 'GET',
+            url: "/getExitiingUser",
+            data: {
+                'type_of_search': type_of_search, 'searchString': searchString,
+            },
+            success: function (response) {
+                console.log(response['responseData']);
+                if (response['responseData']['existing'] == true) {
+                    $('#registerBtn').prop('disabled', true);
+                    $(thisTxt).css('border', '2px solid red');
+                    //---------------------------------------------------
+                    if (inputType == 'text') {
+                        alert('User with this Contact already exist!');
+                        $('#sendOTPbtnn1').prop('disabled', true);
+                        $('#sendOTPbtnn1').css('cursor', 'not-allowed');
+                    }
+
+                    //---------------------------------------------------
+                    return false;
+                } else {
+                    $(thisTxt).css('border', '');
+                    $('#registerBtn').prop('disabled', false);
+                    if (inputType == 'text') {
+                        $('#sendOTPbtnn1').prop('disabled', false);
+                        $('#sendOTPbtnn1').css('cursor', '');
+                    }
+                }
+            }
+        });
+
+        // -------------------------------------------------------------------------
+    }
+    // ===============================================================================================================
+    function checkEmail() {
+        var emailData = $('#guardianEmail').val();
+
+    }
+</script>
+
+
+
+
+<script>
+$(function() {
+    $(".inputs").keyup(function () {
+        if (this.value.length == this.maxLength) {
+          $(this).next('.inputs').focus();
+        }
+    });
+});
+</script>
+</html>

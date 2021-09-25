@@ -1,0 +1,212 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Mera Rojgar</title>
+        <meta charset="UTF-8" />
+        <link rel="shortcut icon" href="{% static 'images/fav.png' %}" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        <meta name="keywords" content="">
+        <meta name="robots" content="index, follow">
+        <meta name="description" content="" />
+
+            <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    		<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+    		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    		<link rel="preconnect" href="https://fonts.googleapis.com">
+			<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+			<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+            <link rel="stylesheet" type="text/css" href="{% static 'css/custom.css' %}">
+			<style>
+                body{
+                    min-height: 100vh;
+                }
+                .sticky-footer{
+                    position: sticky;
+                    top: 100%;
+                }
+            </style>
+
+</head>
+<body>
+	<div class="ovrlay"></div>
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-12">
+                    <a href="{% url 'home' %}" class="brand"><img src="{% static 'images/logo.png' %}"></a>
+                    <a href="javascript:;" class="toggle-menu  float-right mt-3  "><i
+                            class="fa fa-bars  x d-inline-block d-md-none"></i></a>
+                </div>
+                <div class="col-md-9 text-right sidebar-menu">
+                    <a href="javascript:;" class="d-block d-md-none closee">X</a>
+                    <ul>
+                        <li><a href="{% url 'home' %}" class="active">Home</a></li>
+                        <li><a href="{% url 'about' %}">About Mera Rojgar</a></li>
+                        <li><a href="{% url 'product_catalog' %}">Product Catalog</a></li>
+                        <li><a href="{% url 'contact' %}">Contact Us</a></li>
+                        {% if request.session.userID %}
+                        <!-- <li><a href="{% url 'logout' %}">Logout</a></li> -->
+                        <li><a href="{% url 'cart' %}"
+                                style="border:0px solid #ff5a10b3;color:#ff5a10b3;padding: 3px 5px;border-radius:10px;"><i
+                                    class="fas fa-shopping-cart"></i>&nbsp; {% if cartLength == 0 %} 0
+                                {% else %}{{cartLength}}{% endif %}</a></li>
+                        <div class="btn-group ml-2">
+                            <span type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                <i class="fas fa-user" style="color:#ff5a10b3;font-size: large;"></i>
+                                <!-- {{request.session.username}} -->
+                            </span>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item mt-2" href="{% url 'customer_info' %}"><i
+                                        style="color:#ff5a10b3;" class="fas fa-user-circle"></i>&nbsp;&nbsp;&nbsp; <small><strong>My
+                                            Profile</strong></small></a>
+                                <a class="dropdown-item mt-2" href="{% url 'wishlist' %}"><i style="color:#ff5a10b3;"
+                                        class="fas fa-heart"></i>&nbsp;&nbsp;&nbsp; <small><strong>My Wishlist</strong></small></a>
+                                <a class="dropdown-item mt-2" href="{% url 'customer_orders' %}"><i
+                                        style="color:#ff5a10b3;" class="fas fa-shopping-bag"></i>&nbsp;&nbsp;&nbsp;
+                                    <small><strong>My Orders</strong></small></a>
+                                <a class="dropdown-item mt-2" href="{% url 'customer_address' %}"><i
+                                        style="color:#ff5a10b3;" class="fas fa-map-marker-alt"></i>&nbsp;&nbsp;&nbsp;
+                                    <small><strong>My Address</strong></small></a>
+                                <hr>
+                                <a class="dropdown-item" href="{% url 'logout' %}"><i style="color:#ff5a10b3;"
+                                        class="fas fa-sign-out-alt"></i>&nbsp;&nbsp;&nbsp; <small><strong>Logout</strong></small></a>
+                            </div>
+                        </div>
+                        <!-- <li style=''><a href="{% url 'customer_info' %}" class="btn btn-primary"
+								style='font-size: smaller;background-color: #ff5a10b3;color: white;border:2px solid white;cursor: pointer;border-radius:10px;'>
+								{{request.session.username}} &nbsp;<i class="fas fa-user"
+									style='font-size: large;color: white;cursor: pointer;'></i></a></li> -->
+                        {% else %}
+                        <li><a href="{% url 'login' %}">Login</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+    
+        </div>
+    </header>
+	<div class="page-header about" >
+		 <div class="container">
+			<div class="row">
+				<div class="col-md-12  ">
+					<h2>About Mera Rojgar    </h2>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<div class="main section about  mt-4">
+		<div class="container">
+			<div class="row">
+					<div class="col-md-5   d-block d-md-none mb-5 ">
+					 	 <img src="{% static 'images/about2.jpg' %}">
+					</div>
+				<div class="col-md-6  ">
+				 	  <p class="mb-0">Now-a-days the Indian youth want to be self-employed but nobody is available to show the right path. The Youth Rural Entrepreneur Foundation’s “Mera Rozgar” scheme aims to make the youth self-reliant by giving them employment. The aim of “Mera Rozgar” is to be a guide the youth, teach them and help them to reach the right destination. We also take care of the likes, dislikes and beliefs of every person, if a man cannot work with chicken, cannot work with fish, or doesn’t want to do farming, we will take responsibility of the best solution. The Center for Excellence guarantees employment. People in every village buy goods, which is the basis of every human. People drink tea, buy vegetables, take a haircut, buy clothes, buy household goods etc. The city/town economy is taking advantage of the village economy. Our foundation’s plan is that, if the economy of the village stays in the village, then the financial status of the village can improve dramatically.</p>
+				</div>
+					<div class="col-md-5 ml-auto d-none d-md-block  ">
+					 	 <img src="{% static 'images/about2.jpg' %}">
+					</div>
+				 
+				</div>
+			 
+			</div>
+		</div>
+
+
+		<div class="main section about  mt-4" style="background: #f6f6f6">
+		<div class="container">
+			<div class="row">
+					<div class="col-md-5     ">
+					 	 <img src="{% static 'images/about1.jpg' %}">
+					</div>
+				<div class="col-md-5 offset-md-1 pt-4 ">
+				 	  <p>In the “Mera Rozgar” scheme, we are focusing on smart street vendors where cycle rickshaws, e-rickshaws, mobile carts on bicycles are built and we will provide a moving shop & the entire facility for installation at a very cheap price. We will link these schemes with the government scheme, so that the youth can easily finance himself with our help. With this the youth can easily take a bicycle or e-rickshaw cart wherever he desires and can open up a barbershop, tea-snack shop, clothes shop, barber shop, vegetable etc. on a bicycle or a cart.</p>
+				</div>
+					 
+				 
+				</div>
+			 
+			</div>
+		</div>
+
+
+
+ 
+
+	<footer class="sticky-footer">
+	    <div class="container">
+			<div class="row">
+				<div class="col-md-6 ">
+					<p>© 2021 by 4youths. All right reservered. </p>
+				</div>
+				<div class="col-md-6 text-center text-md-right ">
+					 <p>
+						<strong>Follow us on:</strong> <a href="https://www.facebook.com/4youths.org/" style="margin-right:15px;margin-left:15px"><i class="fab fa-facebook-f"></i></a>
+						<a href="https://twitter.com/4youthsorg?lang=en" style="margin-right:15px"><i class="fab fa-twitter"></i></a>
+						<a href="https://www.linkedin.com/in/yref/?originalSubdomain=in" style="margin-right:10px"><i class="fab fa-linkedin-in"></i></a>
+					</p>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+
+<!-- enquiry modal -->
+<!-- Modal -->
+<div id="enquiry" class="modal fade enquiry" role="dialog">
+  <div class="modal-dialog modal-md">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header text-left">
+      	 <h4 class="modal-title float-left">Send Enquiry</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+       
+      </div>
+      <div class="modal-body">
+         	<form>
+         		<div class="form-group">
+         			<label>Your Name</label>
+         			<input type="text" placeholder="Enter your name" name="" class="form-control">
+         		</div>
+         		<div class="form-group">
+         			<label>Your Phone Number</label>
+         			<input type="text" placeholder="Enter your phone number" name="" class="form-control">
+         		</div>
+         		<div class="form-group">
+         			<label>Your Address</label>
+         			<input type="text" placeholder="Enter your address" name="" class="form-control">
+         		</div>
+         		<div class="form-group">
+         			<label>Your Email (Optional)</label>
+         			<input type="text" placeholder="Enter your email" name="" class="form-control">
+         		</div>
+         		<div class="form-group">
+         			<label>Remark (Optional)</label>
+         			<textarea placeholder="Enter remark" name="" class="form-control"></textarea>  
+         		</div>
+         		<button class="btn   float-right mt-3 ">Submit</button>
+         	</form>
+      </div>
+       
+    </div>
+
+  </div>
+</div>
+
+<!-- scrips -->
+<script
+  src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="  crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
+ <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<script type="text/javascript" src="{% static 'js/custom.js' %}"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</body>
+</html>

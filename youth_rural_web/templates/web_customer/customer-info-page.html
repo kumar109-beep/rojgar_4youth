@@ -1,0 +1,349 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Mera Rojgar</title>
+        <meta charset="UTF-8" />
+        <link rel="shortcut icon" href="{% static 'images/fav.png' %}" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        <meta name="keywords" content="">
+        <meta name="robots" content="index, follow">
+        <meta name="description" content="" />
+
+            <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    		<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+    		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    		<link rel="preconnect" href="https://fonts.googleapis.com">
+			<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+			<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+            <link rel="stylesheet" type="text/css" href="{% static 'css/custom.css' %}">
+            <!-- Font Awesome -->
+            <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+            rel="stylesheet"
+            />
+            <!-- Google Fonts -->
+            <link
+            href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+            rel="stylesheet"
+            />
+            <!-- MDB -->
+            <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.css"
+            rel="stylesheet"
+            />
+
+            <style>
+                body{
+                    min-height: 100vh;
+                }
+                .sticky-footer{
+                    position: sticky;
+                    top: 100%;
+                }
+            </style>
+
+</head>
+<body>
+	<div class="ovrlay"></div>
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-12">
+                    <a href="{% url 'home' %}" class="brand"><img src="{% static 'images/logo.png' %}"></a>
+                    <a href="javascript:;" class="toggle-menu  float-right mt-3  "><i
+                            class="fa fa-bars  x d-inline-block d-md-none"></i></a>
+                </div>
+                <div class="col-md-9 text-right sidebar-menu">
+                    <a href="javascript:;" class="d-block d-md-none closee">X</a>
+                    <ul>
+                        <li><a href="{% url 'home' %}" class="active">Home</a></li>
+                        <li><a href="{% url 'about' %}">About Mera Rojgar</a></li>
+                        <li><a href="{% url 'product_catalog' %}">Product Catalog</a></li>
+                        <li><a href="{% url 'contact' %}">Contact Us</a></li>
+                        {% if request.session.userID %}
+                        <!-- <li><a href="{% url 'logout' %}">Logout</a></li> -->
+                        <li><a href="{% url 'cart' %}"
+                                style="border:0px solid #ff5a10b3;color:#ff5a10b3;padding: 3px 5px;border-radius:10px;"><i
+                                    class="fas fa-shopping-cart"></i>&nbsp; {% if cartLength == 0 %} 0
+                                {% else %}{{cartLength}}{% endif %}</a></li>
+                        <div class="btn-group ml-2">
+                            <span type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                <i class="fas fa-user" style="color:#ff5a10b3;font-size: large;"></i>
+                                <!-- {{request.session.username}} -->
+                            </span>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item mt-2" href="{% url 'customer_info' %}"><i
+                                        style="color:#ff5a10b3;" class="fas fa-user-circle"></i>&nbsp;&nbsp;&nbsp; <small><strong>My
+                                            Profile</strong></small></a>
+                                <a class="dropdown-item mt-2" href="{% url 'wishlist' %}"><i style="color:#ff5a10b3;"
+                                        class="fas fa-heart"></i>&nbsp;&nbsp;&nbsp; <small><strong>My Wishlist</strong></small></a>
+                                <a class="dropdown-item mt-2" href="{% url 'customer_orders' %}"><i
+                                        style="color:#ff5a10b3;" class="fas fa-shopping-bag"></i>&nbsp;&nbsp;&nbsp;
+                                    <small><strong>My Orders</strong></small></a>
+                                <a class="dropdown-item mt-2" href="{% url 'customer_address' %}"><i
+                                        style="color:#ff5a10b3;" class="fas fa-map-marker-alt"></i>&nbsp;&nbsp;&nbsp;
+                                    <small><strong>My Address</strong></small></a>
+                                <hr>
+                                <a class="dropdown-item" href="{% url 'logout' %}"><i style="color:#ff5a10b3;"
+                                        class="fas fa-sign-out-alt"></i>&nbsp;&nbsp;&nbsp; <small><strong>Logout</strong></small></a>
+                            </div>
+                        </div>
+                        <!-- <li style=''><a href="{% url 'customer_info' %}" class="btn btn-primary"
+								style='font-size: smaller;background-color: #ff5a10b3;color: white;border:2px solid white;cursor: pointer;border-radius:10px;'>
+								{{request.session.username}} &nbsp;<i class="fas fa-user"
+									style='font-size: large;color: white;cursor: pointer;'></i></a></li> -->
+                        {% else %}
+                        <li><a href="{% url 'login' %}">Login</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+    
+        </div>
+    </header>
+	{% comment %} <div class="page-header-small ">
+		 <div class="container">
+			<div class="row">
+				<div class="col-md-12  ">
+					<h4 id='customerEntryType' style='font-weight:800;'>Customer Details</h4>
+				</div>
+			</div>
+		</div>
+	</div> {% endcomment %}
+	<div class="main section products" >
+         <div class="container" id='login_section_container' style='display:;'>
+			<div class="row">
+            <div class="col-lg-12 ">
+                    <div class="form-group">
+                        <img  style="border-radius: 10px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQg0Cyex77mJP-ZLeHCjujDiSo6bDVlPqztLw&usqp=CAU" alt="" height="130px" width="130px">
+                    </div>
+                    <hr>
+                    <a style='color:white;' href="{% url 'customer_orders' %}" class="btn btn-sm btn-info  btn-rounded">My Orders</a>
+                    <a style='color:white;' href="{% url 'customer_address' %}" class="btn btn-sm btn-warning btn-rounded">Manage Address</a>
+                    <hr>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label><strong>Full Name</strong></label>
+                        <input type="text" placeholder="" name="username" id='customerName' class="form-control" onkeypress="return /[a-zA-Z0-9]/i.test(event.key)" value='{{request.session.userFullName}}' readonly>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label><strong>Contact</strong></label>
+                        <input type="text" placeholder="" name="username" id='customerName' class="form-control" onkeypress="return /[a-zA-Z0-9]/i.test(event.key)" value='{{request.session.mobileNO}}' readonly>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label><strong>Email</strong></label>
+                        <input type="email" placeholder="" name="username" id='customerName' class="form-control" onkeypress="return /[a-zA-Z0-9]/i.test(event.key)" value='{{request.session.email}}' readonly>
+                    </div>
+                </div>
+                <div class="col-lg-12 mt-2 text-right">
+                    <button class="btn btn-primary btn-sm  btn-rounded" data-toggle="modal" data-target="#updatePassword" data-backdrop="static" data-keyboard="false">Update Password</button>
+                    <button class="btn btn-primary btn-sm  btn-rounded" data-toggle="modal" data-target="#exampleModalCenter" data-backdrop="static" data-keyboard="false">Update Profile</button>
+                </div>
+			</div>
+		</div>
+	</div>
+
+
+	<footer class="sticky-footer">
+	    <div class="container">
+			<div class="row">
+				<div class="col-md-6 ">
+					<p>© 2021 by 4youths. All right reservered. </p>
+				</div>
+				<div class="col-md-6 text-center text-md-right ">
+					 <p>
+						<strong>Follow us on:</strong> <a href="https://www.facebook.com/4youths.org/" style="margin-right:15px;margin-left:15px"><i class="fab fa-facebook-f"></i></a>
+						<a href="https://twitter.com/4youthsorg?lang=en" style="margin-right:15px"><i class="fab fa-twitter"></i></a>
+						<a href="https://www.linkedin.com/in/yref/?originalSubdomain=in" style="margin-right:10px"><i class="fab fa-linkedin-in"></i></a>
+					</p>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Update Profile</h5>
+        </button>
+      </div>
+      <div class="modal-body">
+      <div class="col-lg-12">
+            <div class="form-group">
+                <label><strong>Full Name</strong></label>
+                <input type="text" placeholder="" name="" id='' class="form-control" onkeypress="return /[a-zA-Z ]/i.test(event.key)" value='{{request.session.userFullName}}'>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="form-group">
+                <label><strong>Email</strong></label>
+                <input type="text" placeholder="" name="username" id='userEmail' class="form-control" onkeypress="return /[a-zA-Z0-9@._]/i.test(event.key)" value='{{request.session.email}}'>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="form-group">
+                <label><strong>Contact</strong></label>
+                <input type="text" placeholder="" name="username" id='userContact' class="form-control" onkeypress="return /[0-9]/i.test(event.key)" maxlength="10" value='{{request.session.mobileNO}}'>
+            </div>
+        </div>
+      </div>
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary btn-sm" onclick='updateprofile()'>Update</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="updatePassword" tabindex="-1" role="dialog" aria-labelledby="updatePasswordTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <!-- <div class="modal-header">
+        <p class="modal-title" id="exampleModalLongTitle"><strong>Update Password</strong></p>
+      </div> -->
+      <div class="modal-body" style="display: flex;">
+          <div style="width: 40%;">
+              <div><strong>Your new password must:</strong></div><br>
+              <small><ul>
+                <li>Be at least 4 characters in length</li>
+                <li>Not be same as your current password</li>
+                <li>Not contain common passwords.</li>
+            </ul></small>
+          </div>
+
+          <div style="width: 60%;border-left: 1px solid rgb(206, 200, 200);padding-left: 5px;">
+            <div class=""><strong>Change Password</strong></div><br>
+            <!-- <div class="input-group mb-2">
+                <input type="text" class="form-control" placeholder="Type Current Password">
+            </div> -->
+            <div class="form-outline" style="margin-bottom: 10px;">
+                <input type="password" id="form1" class="form-control" />
+                <label class="form-label" for="form1">Enter current password</label>
+            </div>
+            <div class="form-outline" style="margin-bottom: 10px;">
+                <input type="password" id="form1" class="form-control" />
+                <label class="form-label" for="form1">Enter new password</label>
+            </div>
+            <div class="form-outline" style="margin-bottom: 10px;">
+                <input type="password" id="form1" class="form-control" />
+                <label class="form-label" for="form1">Re-enter new password</label>
+            </div>
+            <div class="form-outline" style="margin-bottom: 10px;">
+                <input type="text" id="form1" class="form-control" />
+                <label class="form-label" for="form1">Enter OTP sent to +91-{{request.session.mobileNO}}</label>
+            </div>
+            <div class="text-right">
+                <small style="color:#ff5a10b3;cursor:pointer;"><strong><i class="fas fa-redo-alt"></i> Re-send OTP</strong></small>
+            </div>
+            
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary btn-sm">Update</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- scrips -->
+<script
+  src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="  crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
+ <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<script type="text/javascript" src="{% static 'js/custom.js' %}"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<!-- MDB -->
+<script
+  type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.js"
+></script>
+</body>
+
+<script>
+    function showSignUpPage(){
+        $('#login_section_container').css('display','none');
+        $('#signin_section_container').css('display','');
+        $('#customerEntryType').text('');
+        $('#customerEntryType').text('New Customer Registration');
+    }
+
+    function showLoginPage(){
+        $('#signin_section_container').css('display','none');
+        $('#login_section_container').css('display','');
+        $('#customerEntryType').text('');
+        $('#customerEntryType').text('Customer Login');
+    }
+
+
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+
+    function updateprofile(){
+      var email = $('#userEmail').val().trim();
+      var contact = $('#userContact').val().trim();
+        // ---------------   AJAX Call   ---------------------
+        const csrftoken = getCookie('csrftoken');
+        // swal.showLoading();
+        $.ajax({
+            type: 'POST',
+            url: "/customer-management/customer-info",
+            headers: { 'X-CSRFToken': csrftoken },
+            data: {
+                'userEmail': email, 'userContact': contact
+            },
+            success: function (response) {
+                console.log(response['responseData']);
+                if(response['responseData']['message'] == 'success'){
+                    alert('Profile Updated Successfully. Login to Validate');
+                    window.location.href = "/logout";
+                }else{
+                    alert('An Error Occured.Try Again!');
+                    return false;
+                }
+            }
+        });
+
+        // ---------------------------------------------------
+    }
+
+    function viewpassword(){
+
+    }
+
+    function viewRegisterpassword(){
+
+    }
+</script>
+</html>
